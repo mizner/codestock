@@ -1,0 +1,9 @@
+{% set base = 'page' %}
+<section class="{{ base }}">
+    <div class="container">
+        <article>
+            <h1>{{ context.title }}</h1>
+            <div class="{{ base }}__content">{{ context.content }}</div>
+        </article>
+    </div>
+</section>

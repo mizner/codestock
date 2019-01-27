@@ -1,0 +1,56 @@
+@mixin button-primary {
+  background-color: green;
+  color: white;
+  display: table;
+  margin: auto;
+  transition: 400ms ease all;
+  border-radius: 100px;
+  line-height: 1em;
+  padding: 1em 2em;
+  position: relative;
+  border: none;
+  font-weight: 600;
+  &:before {
+    background-color: orange;
+    border-radius: inherit;
+    transition: .3s opacity ease;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    right: 50%;
+    transform-origin: center center;
+    transform: translate(50%, -50%);
+    opacity: 0;
+  }
+  &:focus,
+  &:hover {
+    color: white;
+    cursor: pointer;
+
+    &:before {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin button-secondary {
+  background-color: orangered;
+  &:focus,
+  &:hover {
+    &:before {
+      content: none;
+    }
+  }
+}
+
+@mixin button-accent {
+  background-color: dodgerblue;
+  text-transform: uppercase;
+  padding: 1em 2.5em;
+  span {
+    font-size: .9em;
+  }
+}

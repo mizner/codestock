@@ -42,3 +42,4 @@ wp-content/themes/*
 
 # Exceptions (generally, our custom work)
 !wp-content/plugins/codestock
+!wp-content/themes/codestock2019

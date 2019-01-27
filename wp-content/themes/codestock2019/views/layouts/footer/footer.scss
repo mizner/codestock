@@ -1,0 +1,16 @@
+.footer {
+  $base: &;
+
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: $brand__gray__dark;
+  color: white;
+
+  svg {
+    fill: white;
+  }
+
+  #{$base}__copyright {
+
+  }
+}

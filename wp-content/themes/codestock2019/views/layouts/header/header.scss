@@ -1,0 +1,14 @@
+.header {
+  $base: &;
+
+  background-color: $brand__gray__dark;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  #{$base}__logo {
+    max-width: 200px;
+    @include for-phone-only {
+      margin: auto;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{% set base = 'footer' %}
+<footer id="{{ base }}" class="{{ base }}">
+    <div class="container">
+        {{ search_form() }}
+        <p class="{{ base }}__copyright">{{ site('title') }} | All Rights Reserved {{ '©'|raw }} {{ "now"|date('Y') }}</p>
+    </div>
+</footer>
+<!-- #{{ base }} -->

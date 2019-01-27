@@ -1,0 +1,25 @@
+{#{{ dump() }}#}
+{% set base = 'menu-main' %}
+<nav id="menuMain" class="{{ base }}">
+    <button id="menuMainButton"
+            class="{{ base }}__button"
+            data-target="#{{ base }}"
+            aria-controls="{{ base }}"
+            aria-expanded="false"
+            type="button" data-toggle="collapse"
+            aria-label="Toggle navigation">
+        <svg class='icon'>
+            <use xlink:href='#icon-bars'/>
+        </svg>
+    </button>
+    {{ function('wp_nav_menu', {
+        'menu'            : 'menu_primary',
+        'theme_location'  : 'menu_primary',
+        'container'       : false,
+        'container_id'    : '',
+        'container_class' : '',
+        'menu_id'         : false,
+        'menu_class'      : "#{base}__list",
+        'depth'           : 2,
+    }) }}
+</nav>

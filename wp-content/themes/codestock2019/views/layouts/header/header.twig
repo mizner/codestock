@@ -1,0 +1,12 @@
+{% set base = 'header' %}
+<header id="{{ base }}" class="{{ base }}">
+    <div class="container">
+        <div class="{{ base }}__logo">
+            <a href="{{ function('get_home_url') | e('esc_url') }}">
+                {{ svg('logo') }}
+            </a>
+        </div>
+    </div>
+    {% include 'views/layouts/menu-main/menu-main.twig' %}
+</header>
+<!-- #{{ base }} -->

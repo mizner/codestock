@@ -1,0 +1,28 @@
+.menu-main {
+  $base: &;
+
+  #{$base}__button {
+    @include for-tablet-portrait-up {
+      display: none;
+    }
+  }
+
+  #{$base}__menu {
+    padding-left: 0;
+
+    li > ul:not([aria-expanded="true"]) {
+      @include screen-reader-text;
+    }
+
+    li {
+      display: inline-block;
+    }
+
+    li a {
+      line-height: 1.5em;
+      padding-left: .5em;
+      padding-right: .5em;
+      display: block;
+    }
+  }
+}
