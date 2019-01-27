@@ -4,7 +4,7 @@ get_header();
 while (have_posts()) :
     the_post();
 
-    the_content();
+    do_action('theme_view_main', get_queried_object());
 
 endwhile; // End of the loop.
 

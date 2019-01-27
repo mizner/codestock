@@ -43,6 +43,14 @@ function monitor (cb) {
   );
   watch(
     [
+      `./src/images/**/*`,
+    ],
+    series(
+      reload
+    )
+  );
+  watch(
+    [
       `./**/*.php`,
       `./**/*.twig`
     ],
