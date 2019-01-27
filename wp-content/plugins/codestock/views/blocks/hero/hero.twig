@@ -1,0 +1,18 @@
+{#{{ dump() }}#}
+{% if is_preview %}
+    <h1>Hero</h1>
+{% endif %}
+{% set base = 'hero' %}
+<section class="{{ base }}">
+    <div class="container">
+        <h1>{{ acf.title }}</h1>
+        <div class="{{ base }}__content">
+            {{ acf.description }}
+            {% if acf.link %}
+                <a href="{{ acf.link.url }}" class="button" target="{{ acf.link.target }}">
+                    <span>{{ acf.link.title }}</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>

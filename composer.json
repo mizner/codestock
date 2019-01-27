@@ -1,0 +1,60 @@
+{
+  "name": "codestock/wordpress",
+  "description": "CodeStock",
+  "authors": [
+    {
+      "name": "Michael Mizner",
+      "email": "mike@mizner.io"
+    }
+  ],
+  "extra": {
+    "installer-paths": {
+      "wp-content/themes/{$name}/": [
+        "type:wordpress-theme"
+      ],
+      "wp-content/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "wp-content/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "composer",
+      "url": "https://composer.deliciousbrains.com/3998821A01BD70FAD9531E70B4F5EE17"
+    },
+    {
+      "type": "composer",
+      "url": "https://composer.pyxl.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "require-dev": {
+    "vlucas/phpdotenv": "^2.4"
+  },
+  "require": {
+    "php": "^7.0",
+    "deliciousbrains-plugin/wp-migrate-db-pro": "*",
+    "deliciousbrains-plugin/wp-migrate-db-pro-media-files": "*",
+    "pyxl/acf-pro": "5.8.0-beta3",
+    "wpackagist-plugin/timber-library": "^1.7"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "@installWordPress"
+    ],
+    "post-update-cmd": [
+    ],
+    "installWordPress": [
+      "wp core download --path=core --skip-content --force --version='5.0.3'"
+    ]
+  }
+}
