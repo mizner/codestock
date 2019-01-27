@@ -34,7 +34,10 @@ class Accordion extends Block
                         [
                             'slug' => 'description',
                             'label' => 'Description',
-                            'type' => 'textarea',
+                            'type'         => 'wysiwyg',
+                            'toolbar'      => 'basic',
+                            'media_upload' => 0,
+                            'delay'        => 1,
                         ],
                     ],
                 ],
@@ -44,3 +47,4 @@ class Accordion extends Block
         parent::register($args);
     }
 }
+
