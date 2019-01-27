@@ -14,12 +14,36 @@ class TimberFunctions
 
     public function add_to_twig($twig)
     {
-        $twig->addFunction(new Timber\Twig_Function('svg', [SVG::class, 'render']));
-        $twig->addFunction(new Timber\Twig_Function('image', [Utils::class, 'image']));
-        $twig->addFunction(new Timber\Twig_Function('site', 'get_bloginfo'));
-        $twig->addFunction(new Timber\Twig_Function('search_form', 'get_search_form'));
-        $twig->addFunction(new Timber\Twig_Function('log', [Utils::class, 'log']));
-        $twig->addFunction(new Timber\Twig_Function('critical', [CriticalAssets::class, 'render']));
+        $actions = [
+            [
+                'name' => 'svg',
+                'action' => [SVG::class, 'render'],
+            ],
+            [
+                'name' => 'image',
+                'action' => [Utils::class, 'image'],
+            ],
+            [
+                'name' => 'site',
+                'action' => 'get_bloginfo',
+            ],
+            [
+                'name' => 'search_form',
+                'action' => 'get_search_form',
+            ],
+            [
+                'name' => 'log',
+                'action' => [Utils::class, 'log'],
+            ],
+            [
+                'name' => 'critical',
+                'action' => [CriticalAssets::class, 'render'],
+            ],
+        ];
+
+        foreach ($actions as $action) {
+            $twig->addFunction(new Timber\Twig_Function($action['name'], $action['action']));
+        }
 
         return $twig;
     }
