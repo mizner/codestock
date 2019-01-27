@@ -5,90 +5,97 @@ namespace Pyxl\Theme;
 use const Pyxl\Theme\PATH;
 use const Pyxl\Theme\URI;
 
-class Utils {
+class Utils
+{
 
-	public static function is_empty( $data ) {
-		if ( is_integer( $data ) ) {
-			return false;
-		}
-		if ( is_string( $data ) ) {
-			return empty( trim( $data ) );
-		}
-		if ( is_array( $data ) ) {
-			return empty( $data );
-		}
-		if ( is_object( $data ) ) {
-			return empty( (array) $data );
-		}
-	}
+    public static function is_empty($data)
+    {
+        if (is_integer($data)) {
+            return false;
+        }
+        if (is_string($data)) {
+            return empty(trim($data));
+        }
+        if (is_array($data)) {
+            return empty($data);
+        }
+        if (is_object($data)) {
+            return empty((array)$data);
+        }
+    }
 
-	public static function has_key( $key, $data ) {
-		if ( is_array( $data ) ) {
-			return array_key_exists( $key, $data );
-		}
-		if ( is_object( $data ) ) {
-			return property_exists( $data, $key );
-		}
-	}
+    public static function has_key($key, $data)
+    {
+        if (is_array($data)) {
+            return array_key_exists($key, $data);
+        }
+        if (is_object($data)) {
+            return property_exists($data, $key);
+        }
+    }
 
-	public static function noop() {
-		return null;
-	}
+    public static function noop()
+    {
+        return null;
+    }
 
-	function log() {
-		if ( ! WP_DEBUG_LOG ) {
-			return;
-		}
+    function log()
+    {
+        if (!WP_DEBUG_LOG) {
+            return;
+        }
 
-		foreach ( func_get_args() as $arg ) {
-			error_log( "--------------------------------------------------------------------------------------------------" );
-			if ( is_array( $arg ) || is_object( $arg ) ) {
-				error_log( print_r( $arg, true ) );
+        foreach (func_get_args() as $arg) {
+            error_log("--------------------------------------------------------------------------------------------------");
+            if (is_array($arg) || is_object($arg)) {
+                error_log(print_r($arg, true));
 
-			} else {
-				error_log( $arg );
-			}
-			error_log( "--------------------------------------------------------------------------------------------------" );
-		}
-	}
+            } else {
+                error_log($arg);
+            }
+            error_log("--------------------------------------------------------------------------------------------------");
+        }
+    }
 
-	/**
-	 * @param $file
-	 *
-	 * @return bool|int|null
-	 * @since 1.9.0
-	 */
-	public static function cache_buster( $file ) {
-		return file_exists( PATH . $file ) ? filectime( PATH . $file ) : null;
-	}
+    /**
+     * @param $file
+     *
+     * @return bool|int|null
+     * @since 1.9.0
+     */
+    public static function cache_buster($file)
+    {
+        return file_exists(PATH . $file) ? filectime(PATH . $file) : null;
+    }
 
-	/**
-	 * @param $path
-	 *
-	 * @return null|string
-	 */
-	public static function env_check( $path ) {
-		// Our default variable, will pass as null by default.
-		$qualifiedFile = null;
+    /**
+     * @param $path
+     *
+     * @return null|string
+     */
+    public static function env_check($path)
+    {
+        // Our default variable, will pass as null by default.
+        $qualifiedFile = null;
 
-		$themePath = PATH;
-		$themeUri  = URI;
+        $themePath = PATH;
+        $themeUri = URI;
 
-		// If dev file exists e.g( app.js ) override $qualifiedFile.
-		if ( file_exists( $themePath . $path ) ) {
-			$qualifiedFile = $themeUri . $path;
-		}
+        // If dev file exists e.g( app.js ) override $qualifiedFile.
+        if (file_exists($themePath . $path)) {
+            $qualifiedFile = $themeUri . $path;
+        }
 
-		// Create a string to match a possible production file e.g.( app.min.js ) which is likely uglified/minified.
-		$extensionPos   = strrpos( $path, '.' );
-		$fileProduction = substr( $path, 0, $extensionPos ) . '.min' . substr( $path, $extensionPos );
+        // Create a string to match a possible production file e.g.( app.min.js ) which is likely uglified/minified.
+        $extensionPos = strrpos($path, '.');
+        $fileProduction = substr($path, 0, $extensionPos) . '.min' . substr($path, $extensionPos);
 
-		// Test for production file e.g.( app.min.js) override $qualifiedFile.
-		if ( file_exists( $themePath . $fileProduction ) ) {
-			$qualifiedFile = $themeUri . $fileProduction;
-		}
+        // Test for production file e.g.( app.min.js) override $qualifiedFile.
+        if (file_exists($themePath . $fileProduction)) {
+            $qualifiedFile = $themeUri . $fileProduction;
+        }
 
-		// In order or priority return null, development file, or production file.
-		return $qualifiedFile;
-	}
+        // In order or priority return null, development file, or production file.
+        return $qualifiedFile;
+    }
 }
