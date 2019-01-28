@@ -1,14 +1,14 @@
 @mixin font-primary {
-  font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
+  font-family: 'Fira Sans', sans-serif;
   font-weight: 400;
 }
 
 @mixin font-secondary {
-  font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;
+  font-family: 'Fira Code', monospace;
   font-weight: 600;
 }
 
 @mixin font-accent {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Fira Code', monospace;
   font-weight: 700;
 }

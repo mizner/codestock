@@ -1,6 +1,6 @@
 <?php
 
-namespace Pyxl\Theme;
+namespace CodeStock\Theme;
 
 class MarkupHelper
 {

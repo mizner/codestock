@@ -1,0 +1,17 @@
+{#{{ dump() }}#}
+{% set base = 'ArchiveSpeakers' %}
+<section class="{{ base }}">
+    <div class="container">
+        {% for post in posts %}
+            <article>
+                <figure>
+                    <img src="{{ post.image.src }}" alt="{{ post.image.alt }}">
+                </figure>
+                <a href="{{ post.link }}">
+                    <h3>{{ post.title }}</h3>
+                </a>
+                <div class="{{ base }}__content">{{ post.post_excerpt }}</div>
+            </article>
+        {% endfor %}
+    </div>
+</section>

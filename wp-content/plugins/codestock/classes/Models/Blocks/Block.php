@@ -24,7 +24,10 @@ class Block
             }
             return new WP_Error('broke', __('Arguments "' . $key . '" is required', 'codestock'));
         }
-
+        if (!function_exists('get_field')) {
+            // Disable if ACF is not active
+            return false;
+        }
         self::register_block($args);
         self::register_field_group($args);
     }
@@ -32,15 +35,15 @@ class Block
     private static function register_field_group($args)
     {
         $args = [
-            'key' => "block/{$args['slug']}",
-            'title' => __($args['name'], 'codestock'),
-            'fields' => self::slug_handler($args['fields']),
+            'key'      => "block/{$args['slug']}",
+            'title'    => __($args['name'], 'codestock'),
+            'fields'   => self::slug_handler($args['fields']),
             'location' => [
                 [
                     [
-                        'param' => 'block',
+                        'param'    => 'block',
                         'operator' => '==',
-                        'value' => "acf/{$args['slug']}",
+                        'value'    => "acf/{$args['slug']}",
                     ],
                 ],
             ],
@@ -53,8 +56,8 @@ class Block
         $acf_fields = [];
         foreach ($fields as $field) {
             $acf_fields[] = array_merge($field, [
-                'key' => "block/{$field['slug']}",
-                'name' => $field['slug'],
+                'key'        => "block/{$field['slug']}",
+                'name'       => $field['slug'],
                 'sub_fields' => Util::has_key('sub_fields', $field) ? self::slug_handler($field['sub_fields']) : false,
             ]);
         }
@@ -64,27 +67,27 @@ class Block
     private static function register_block($args)
     {
         $defaults = [
-            'name' => $args['slug'],
-            'title' => __($args['name'], 'codestock'),
-            'description' => "The {$args['name']} block",
+            'name'            => $args['slug'],
+            'title'           => __($args['name'], 'codestock'),
+            'description'     => "The {$args['name']} block",
             'render_callback' => function ($block, $content = '', $is_preview = false) use ($args) {
                 $hook = "block/{$args['slug']}";
                 // var_dump($hook);
                 do_action($hook, [
-                    'block' => $block,
-                    'register' => $args,
-                    'acf' => get_fields(),
+                    'block'      => $block,
+                    'register'   => $args,
+                    'acf'        => get_fields(),
                     'is_preview' => $is_preview,
                 ]);
             },
-            'supports' => [
+            'supports'        => [
                 // 'mode' => false,
                 // 'align' => 'full-width',
             ],
-            'category' => 'layout',
-            'icon' => 'layout', // http://aalmiray.github.io/ikonli/cheat-sheet-dashicons.html
-            'mode' => 'preview',
-            'keywords' => [$args['slug']],
+            'category'        => 'layout',
+            'icon'            => 'layout', // http://aalmiray.github.io/ikonli/cheat-sheet-dashicons.html
+            'mode'            => 'preview',
+            'keywords'        => [$args['slug']],
         ];
 
         acf_register_block(array_merge($defaults, $args));

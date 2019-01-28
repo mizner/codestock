@@ -1,6 +1,6 @@
 <?php
 
-namespace Pyxl\Theme;
+namespace CodeStock\Theme;
 
 spl_autoload_register( function ( $class ) {
 

@@ -22,14 +22,31 @@ add_action('plugins_loaded', function () {
     /**
      * Models
      */
+    // Post Types
+    Models\PostTypes\Speakers::init();
+    // Taxonomies
+    Models\Taxonomies\EventYear::init();
+    // Field Groups
+    Models\FieldGroups\Speakers::init();
+    // Blocks
     Models\Blocks\Hero::init();
     Models\Blocks\Accordion::init();
+
     /**
      * Controllers
      */
-    Controllers\Blocks\Hero::init();
-    Controllers\Blocks\Accordion::init();
+
+    // Post Types
+    Controllers\PostTypes\Speakers::init();
     // Enqueues
     Controllers\Enqueues\Blocks::init();
+    // Blocks
+    Controllers\Blocks\Hero::init();
+    Controllers\Blocks\Accordion::init();
+
+
+    add_action( 'wp_loaded', function(){
+        flush_rewrite_rules();
+    });
 });
 

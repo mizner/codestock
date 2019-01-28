@@ -1,11 +1,11 @@
 <?php
 
-namespace Pyxl\Theme;
+namespace CodeStock\Theme;
 
 /**
  * Class CriticalStyles
  *
- * @package Pyxl\Theme
+ * @package CodeStock\Theme
  */
 class CriticalAssets
 {

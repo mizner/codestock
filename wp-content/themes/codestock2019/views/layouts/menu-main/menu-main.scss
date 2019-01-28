@@ -1,13 +1,20 @@
 .menu-main {
   $base: &;
 
-  #{$base}__button {
+  &__button {
+
     @include for-tablet-portrait-up {
       display: none;
     }
   }
+  a {
+    @include font-secondary;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    text-decoration: none;
+  }
 
-  #{$base}__menu {
+  &__menu {
     padding-left: 0;
 
     li > ul:not([aria-expanded="true"]) {

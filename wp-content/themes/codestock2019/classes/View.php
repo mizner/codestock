@@ -1,6 +1,6 @@
 <?php
 
-namespace Pyxl\Theme;
+namespace CodeStock\Theme;
 
 use Timber\Timber;
 
@@ -15,17 +15,17 @@ class View
     public static function init()
     {
         $class = new self;
-        add_action('theme_view_header', [$class, 'header']);
-        add_action('theme_view_main', [$class, 'main']);
-        add_action('theme_view_footer', [$class, 'footer']);
+        add_action('theme_view_header', [$class, 'header'], 25);
+        add_action('theme_view_main', [$class, 'main'], 25);
+        add_action('theme_view_footer', [$class, 'footer'], 25);
     }
 
     private function getArchiveType()
     {
+        $type = 'taxonomy';
+
         if (is_post_type_archive() || is_home()) {
             $type = 'post_type';
-        } else {
-            $type = 'taxonomy';
         }
 
         return $type;
@@ -33,15 +33,18 @@ class View
 
     private function getType()
     {
-        // Archive, Single, Search, 404
+        $type = '404'; // Default
+
+        if (is_singular() || is_page()) {
+            $type = 'singles';
+        }
+
         if (is_archive() || is_home()) {
             $type = 'archives';
-        } elseif (is_singular()) {
-            $type = 'singles';
-        } elseif (is_search()) {
+        }
+
+        if (is_search()) {
             $type = 'search';
-        } else {
-            $type = '404'; // Default
         }
 
         return $type;
@@ -50,36 +53,38 @@ class View
     private function getPath($type)
     {
         $path = (object)[
-            'dir' => 'views/',
+            'dir'      => 'views/',
             'basename' => '',
-            'file' => '',
+            'file'     => '',
         ];
 
         switch ($type) {
             case 'archives':
                 if (is_home()) {
                     $path->basename = 'post';
-                    $path->dir .= "{$type}/post_type/{$path->basename}";
-                } elseif (is_post_type_archive()) {
+                    $path->dir      .= "{$type}/post_type/{$path->basename}";
+                }
+                elseif (is_post_type_archive()) {
                     $path->basename = $this->queriedObject->name;
-                    $path->dir .= "{$type}/post_type/{$path->basename}";
-                } else {
+                    $path->dir      .= "{$type}/post_type/{$path->basename}";
+                }
+                else {
                     $path->basename = $this->queriedObject->taxonomy;
-                    $path->dir .= "{$type}/taxonomy/{$path->basename}";
+                    $path->dir      .= "{$type}/taxonomy/{$path->basename}";
 
                 }
                 break;
             case 'singles':
                 $path->basename = $this->queriedObject->post_type;
-                $path->dir .= "{$type}/{$path->basename}";
+                $path->dir      .= "{$type}/{$path->basename}";
                 break;
             case 'search':
                 $path->basename = 'search';
-                $path->dir .= "{$path->basename}";
+                $path->dir      .= "{$path->basename}";
                 break;
             default:
                 $path->basename = '404';
-                $path->dir .= "{$path->basename}";
+                $path->dir      .= "{$path->basename}";
                 break;
         }
 
@@ -93,14 +98,13 @@ class View
     private function setContext()
     {
         $context = [
-            'filter' => $this->path->dir,
-            'file' => $this->path->file,
+            'filter'  => $this->path->dir,
+            'file'    => $this->path->file,
             'queried' => $this->queriedObject,
             // 'context' => Timber::get_context(), // Avoiding, given too much information
         ];
 
         if ('singles' === $this->type) {
-            // $context['post'] = Timber::get_post();
             $context['post'] = Timber::get_post();
         }
 
@@ -127,10 +131,13 @@ class View
     public function main($queriedObject)
     {
         $this->queriedObject = $queriedObject;
-        $this->type = $this->getType();
-        $this->path = $this->getPath($this->type);
-        $this->context = $this->setContext();
+        $this->type          = $this->getType();
+        $this->path          = $this->getPath($this->type);
+        $this->context       = $this->setContext();
 
+        if (DEBUG) {
+            var_dump("Filter: {$this->path->dir}");
+        }
         $data = apply_filters($this->path->dir, $this->context);
 
         if (!have_posts()) {
@@ -138,8 +145,6 @@ class View
         }
 
         printf("<!-- start: {$this->path->dir} -->");
-
-
         do_action('theme_before_render', $data);
         switch ($this->type):
             case 'singles':
@@ -154,10 +159,9 @@ class View
             default:
                 break;
         endswitch;
-
         do_action('theme_after_render', $data);
-
         printf("<!-- end: {$this->path->dir} -->");
+
     }
 
     public function footer()
@@ -166,6 +170,4 @@ class View
         Timber::render(PATH . 'views/layouts/footer/footer.twig');
         do_action('theme_after_footer');
     }
-
-
 }

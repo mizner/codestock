@@ -1,9 +1,8 @@
-// global
 body {
   margin: 0;
   font-size: 18px;
   -webkit-font-smoothing: antialiased;
-  color: $brand__gray__dark;
+  color: $brand__gray--dark;
   @include font-primary;
 }
 
