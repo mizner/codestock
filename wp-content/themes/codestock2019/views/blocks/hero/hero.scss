@@ -2,16 +2,18 @@
   background: $brand__purple--dark;
   background: linear-gradient(180deg, $brand__purple--light 0%, $brand__purple--dark 100%);
   color: white;
-  padding-top: 4rem;
+  position: relative;
+  padding-top: 7rem;
   padding-bottom: 4rem;
   @include for-tablet-landscape-up {
-    padding-top: 10rem;
+    padding-top: 15rem;
     padding-bottom: 10rem;
   }
-  position: relative;
+  .container {
+    text-align: center;
+  }
 
   &__button {
-    margin-left: 0;
   }
 
   &__content {
@@ -20,8 +22,8 @@
   }
 
   &__title {
-    margin-top: .5em;
-    margin-bottom: 0;
+    margin-top: .25em;
+    margin-bottom: .25em;
     @include for-tablet-landscape-up {
       font-size: 3em;
     }

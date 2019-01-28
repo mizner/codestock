@@ -53,9 +53,7 @@ export default () => {
 
   // Run
   if (tabTargets.length > 0) {
-    Object.keys(tabTriggers).map(key => {
-      triggerClickEvent(tabTriggers[key]);
-    });
+    [...tabTriggers].map(key => triggerClickEvent(tabTriggers[key]));
 
     document.addEventListener('DOMContentLoaded', ev => {
       let savedChoice = getTabChoice();

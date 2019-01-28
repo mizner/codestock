@@ -1,7 +1,7 @@
 .header {
   $base: &;
 
-  background-color: $brand__purple--light;
+  background: linear-gradient($brand__purple--dark, $brand__purple--light);
   padding-top: 15px;
   padding-bottom: 15px;
 
@@ -17,6 +17,10 @@
   #{$base}__logo {
     display: flex;
     max-width: 400px;
+    margin: auto;
+    @include for-tablet-landscape-up {
+      margin-left: 0;
+    }
 
     a {
       display: block;
@@ -35,14 +39,12 @@
 }
 
 body.header_transparent .header {
-  @include for-tablet-landscape-up {
-    background-color: transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 99;
-  }
+  background: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 99;
 }
 
 body.page-home .header {

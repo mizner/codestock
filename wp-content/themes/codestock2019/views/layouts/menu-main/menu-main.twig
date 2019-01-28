@@ -1,14 +1,18 @@
 {#{{ dump() }}#}
 {% set base = 'menu-main' %}
-<nav id="menuMain" class="{{ base }}">
+<nav id="menuMain"
+     aria-expanded="false"
+     aria-hidden="true"
+     class="{{ base }}">
     <button id="menuMainButton"
-            class="{{ base }}__button"
+            class="{{ base }}__button button"
             data-target="#{{ base }}"
             aria-controls="{{ base }}"
             aria-expanded="false"
-            type="button" data-toggle="collapse"
+            type="button"
+            data-toggle="collapse"
             aria-label="Toggle navigation">
-        <span>Menu</span>
+        <span>toggle_menu</span>
     </button>
     {{ function('wp_nav_menu', {
         'menu'            : 'menu_primary',

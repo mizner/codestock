@@ -1,20 +1,23 @@
 @mixin button-primary {
+  font-size: 1.2em;
   @include font-secondary;
   text-transform: lowercase;
   background-color: $brand__orange;
   color: $brand__orange--dark;
   text-decoration: none;
-  display: table;
   margin: auto;
   transition: 400ms ease all;
-  line-height: 3rem;
-  height: 3rem;
-  padding-left: 1em;
-  padding-right: 1em;
+  line-height: 1em;
+  display: inline-block;
+  padding: 1em 2em;
   position: relative;
   z-index: 10;
   border: none;
   font-weight: 600;
+
+  @include for-tablet-landscape-up {
+    font-size: 1.4em;
+  }
 
   &:focus,
   &:hover {
@@ -32,8 +35,6 @@
   span {
     position: relative;
     z-index: 10;
-    display: inline-block;
-    vertical-align: middle;
     &:after {
       position: absolute;
       content: "()";

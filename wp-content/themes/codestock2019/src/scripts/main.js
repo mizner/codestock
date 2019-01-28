@@ -4,6 +4,6 @@ import { hero } from './blocks/hero';
 
 console.log('main');
 pipe(
+  mobileMenu,
   hero,
-  // mobileMenu,
 )();

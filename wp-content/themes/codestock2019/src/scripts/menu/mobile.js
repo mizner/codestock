@@ -1,6 +1,5 @@
 import { compose } from 'ramda';
 import { ariaToggle } from '../utils/ariaToggle';
-import { windowResizeWithThrottle } from '../utils/windowResizeWithThrottle';
 
 export default () => {
 
@@ -38,18 +37,14 @@ export default () => {
     if (document.body.scrollWidth > menu.widthMax) {
       return menu;
     }
-    menu.button.addEventListener('click', ev => navButtonEventHandler(ev, menu));
+    menu.button.addEventListener('click', ev =>
+      navButtonEventHandler(ev, menu)
+    );
     return menu;
   };
 
-  const init = ev => {
-    compose(
-      parentsButton,
-      navButton,
-    )(menu);
-  };
-
-  document.addEventListener('DOMContentLoaded', ev => init(ev));
-  windowResizeWithThrottle(init);
-
+  compose(
+    parentsButton,
+    navButton,
+  )(menu);
 }
