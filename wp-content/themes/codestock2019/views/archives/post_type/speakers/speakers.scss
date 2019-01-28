@@ -11,23 +11,30 @@
   &__items {
     padding-left: 0;
     list-style-type: none;
+    margin-left: 1rem;
     @include for-tablet-landscape-up {
-      display: grid;
-      justify-content: space-between;
-      grid-template-columns: 24.5% 24.5% 24.5% 24.5%;
+      display: flex;
+      flex-wrap: wrap;
     }
   }
 
   &__item {
-    padding: 3em 1em;
-    background: linear-gradient($brand__orange, $brand__orange--dark);
+    padding: 1em;
+    background: linear-gradient($brand__purple--light, $brand__purple--dark);
     text-align: center;
     margin-bottom: 1em;
+    margin-right: 1rem;
+    @include for-tablet-landscape-up {
+      flex: 1;
+      max-width: 19.5%;
+    }
+    a {
+      text-decoration: none;
+    }
   }
 
   &__image {
     position: relative;
-    max-width: 10rem;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -36,32 +43,15 @@
     img {
       position: relative;
       z-index: 3;
-      clip-path: polygon(50% 0, 95% 30%, 95% 70%, 50% 100%, 5% 70%, 5% 30%);
-    }
-
-    &:after {
-      content: "";
-      background-color: white;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      clip-path: polygon(50% 0, 95% 30%, 95% 70%, 50% 100%, 5% 70%, 5% 30%);
-      transform: scale(1.15);
     }
   }
 
-  &__item-title {
-    text-decoration: none;
-    color: $brand__orange;
-    &:focus,
-    &:hover {
-      color: $brand__green;
-    }
-    h3 {
-      margin-top: 1em;
-      margin-bottom: 0;
-    }
+  &__name {
+    color: white;
+    margin-bottom: .25em;
+  }
+
+  &__position {
+   color: $brand__orange;
   }
 }

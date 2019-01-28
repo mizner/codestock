@@ -90,8 +90,12 @@ textarea {
   max-width: $container-width;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px; // Static value intentional
-  padding-right: 15px; // Static value intentional
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @include for-tablet-landscape-up {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 

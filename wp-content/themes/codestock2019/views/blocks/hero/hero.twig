@@ -10,13 +10,15 @@
     <div class="container">
         <div class="{{ base }}__content">
             <div id="countdown" class="countdown"></div>
-            <h3 class="{{ base }}__title">{{ acf.title }}</h3>
-            {{ acf.description }}
-            {% if acf.link %}
-                <a href="{{ acf.link.url }}" class="{{ base }}__button button" target="{{ acf.link.target }}">
-                    <span>{{ acf.link.title }}</span>
-                </a>
-            {% endif %}
+            <article class="{{ base }}__text">
+                <h3 class="{{ base }}__title">{{ acf.title }}</h3>
+                {{ acf.description }}
+                {% if acf.link %}
+                    <a href="{{ acf.link.url }}" class="{{ base }}__button button" target="{{ acf.link.target }}">
+                        <span>{{ acf.link.title }}</span>
+                    </a>
+                {% endif %}
+            </article>
         </div>
     </div>
 </section>

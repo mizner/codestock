@@ -7,18 +7,21 @@
   padding-bottom: 4rem;
   @include for-tablet-landscape-up {
     padding-top: 15rem;
-    padding-bottom: 10rem;
+    padding-bottom: 5rem;
   }
   .container {
-    text-align: center;
   }
 
-  &__button {
-  }
+
 
   &__content {
     position: relative;
     z-index: 15;
+  }
+  &__text {
+    @include for-tablet-landscape-up {
+      padding-left: 1em;
+    }
   }
 
   &__title {

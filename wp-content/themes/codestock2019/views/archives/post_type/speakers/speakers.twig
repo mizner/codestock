@@ -9,13 +9,19 @@
             {% for post in posts %}
                 {#{{ dump(post) }}#}
                 <li class="{{ base }}__item">
-                    <figure class="{{ base }}__image">
-                        <img src="{{ post.thumbnail.src }}" class="my-thumb-class" alt="Image for {{ post.title }}"/>
-                    </figure>
-                    <a href="{{ post.link }}" class="{{ base }}__item-title">
-                        <h3>{{ post.title }}</h3>
+                    <a href="{{ post.link }}">
+                        <article>
+                            <figure class="{{ base }}__image">
+                                <img src="{{ post.thumbnail.src }}" class="my-thumb-class"
+                                     alt="Image for {{ post.title }}"/>
+                            </figure>
+
+                            <div class="{{ base }}__text">
+                                <h3 class="{{ base }}__name">{{ post.title }}</h3>
+                                <p class="{{ base }}__position">{{ post.position }}</p>
+                            </div>
+                        </article>
                     </a>
-                    <div class="{{ base }}__content">{{ post.post_excerpt }}</div>
                 </li>
             {% endfor %}
         </ul>

@@ -9,7 +9,7 @@
   transition: 400ms ease all;
   line-height: 1em;
   display: inline-block;
-  padding: 1em 2em;
+  padding: .75em 1em;
   position: relative;
   z-index: 10;
   border: none;
@@ -17,6 +17,7 @@
 
   @include for-tablet-landscape-up {
     font-size: 1.4em;
+    padding: 1em 2em;
   }
 
   &:focus,

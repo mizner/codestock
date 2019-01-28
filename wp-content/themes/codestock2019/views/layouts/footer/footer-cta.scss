@@ -1,0 +1,17 @@
+.footer-cta {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background: linear-gradient($brand__orange, $brand__orange--dark);
+  border-bottom: .5rem solid white;
+
+  &__title {
+    color: white;
+    @include for-tablet-landscape-up {
+      font-size: 3em;
+    }
+  }
+
+  &__content {
+    text-align: center;
+  }
+}
