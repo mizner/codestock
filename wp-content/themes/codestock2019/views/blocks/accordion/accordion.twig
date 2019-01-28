@@ -3,16 +3,22 @@
     <h1>accordion</h1>
 {% endif %}
 {% set base = 'accordion' %}
-<section class="{{ base }}">
+<section class="{{ base }} wp-block" data-align="{{ block.align }}">
     <div class="container">
-        <header>
-            <h1>{{ acf.title }}</h1>
-        </header>
         <article class="{{ base }}__content">
-            {% for item in acf.items %}
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.description }}</p>
-            {% endfor %}
+            <header>
+                <h1>{{ acf.title }}</h1>
+            </header>
+            <ul class="{{ base }}__items">
+                {% for item in acf.items %}
+                    <li class="{{ base }}__item">
+                        <h3 class="{{ base }}__title">{{ item.title }}</h3>
+                        <div class="{{ base }}__description">
+                            {{ item.description }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
         </article>
     </div>
 </section>

@@ -2,16 +2,22 @@
 {% set base = 'ArchiveSpeakers' %}
 <section class="{{ base }}">
     <div class="container">
-        {% for post in posts %}
-            <article>
-                <figure>
-                    <img src="{{ post.image.src }}" alt="{{ post.image.alt }}">
-                </figure>
-                <a href="{{ post.link }}">
-                    <h3>{{ post.title }}</h3>
-                </a>
-                <div class="{{ base }}__content">{{ post.post_excerpt }}</div>
-            </article>
-        {% endfor %}
+        <header class="{{ base }}__header">
+            <h1 class="{{ base }}__title">2019 Speakers</h1>
+        </header>
+        <ul class="{{ base }}__items">
+            {% for post in posts %}
+                {#{{ dump(post) }}#}
+                <li class="{{ base }}__item">
+                    <figure class="{{ base }}__image">
+                        <img src="{{ post.thumbnail.src }}" class="my-thumb-class" alt="Image for {{ post.title }}"/>
+                    </figure>
+                    <a href="{{ post.link }}" class="{{ base }}__item-title">
+                        <h3>{{ post.title }}</h3>
+                    </a>
+                    <div class="{{ base }}__content">{{ post.post_excerpt }}</div>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 </section>

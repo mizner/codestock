@@ -1,0 +1,27 @@
+.accordion {
+  &__items {
+    padding-left: 0;
+  }
+
+  &__item {
+    list-style-type: none;
+    padding-left: 0;
+
+    a {
+      color: $brand__orange;
+    }
+  }
+
+  &__title {
+    padding: .75rem 1em;
+    background-color: $brand__green--dark;
+    color: $brand__green;
+    margin: 0;
+  }
+
+  &__description {
+    padding: .5rem 2em;
+    background-color: white;
+    color: $brand__gray--dark;
+  }
+}
