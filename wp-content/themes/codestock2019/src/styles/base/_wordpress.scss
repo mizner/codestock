@@ -115,3 +115,25 @@ a img.aligncenter {
   max-width: 100%;
   height: auto;
 }
+
+
+/* Main column width */
+[class^="wp-block"],
+.wp-block {
+  margin: auto;
+  max-width: 720px;
+}
+
+/* Width of "wide" blocks */
+[class^="wp-block"].alignwide,
+.wp-block[data-align="wide"] {
+  margin: auto;
+  max-width: 1080px;
+}
+
+[class^="wp-block"].alignfull,
+  /* Width of "full-wide" blocks */
+.wp-block[data-align="full"] {
+  margin: auto;
+  max-width: none;
+}

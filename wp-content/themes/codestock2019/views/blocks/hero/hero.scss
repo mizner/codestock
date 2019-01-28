@@ -1,0 +1,68 @@
+.hero {
+  background: $brand__purple--dark;
+  background: linear-gradient(180deg, $brand__purple--light 0%, $brand__purple--dark 100%);
+  color: white;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  @include for-tablet-landscape-up {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+  }
+  position: relative;
+
+  &__button {
+    margin-left: 0;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 15;
+  }
+
+  &__title {
+    @include for-tablet-landscape-up {
+      font-size: 3em;
+    }
+  }
+
+  &__image {
+    background-size: cover;
+    background-attachment: fixed;
+    position: absolute;
+    z-index: 8;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    opacity: .1;
+  }
+
+  &__year {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+
+    &:after {
+      content: "2019";
+      @include font-accent;
+      font-size: 4rem;
+      position: absolute;
+      right: -2vw;
+      bottom: -4vw;
+      opacity: .07;
+      writing-mode: vertical-rl;
+      @include for-tablet-portrait-up {
+        writing-mode: initial;
+        font-size: 15vw;
+      }
+      @include for-tablet-landscape-up {
+        font-size: 20vw;
+      }
+    }
+  }
+}

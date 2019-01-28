@@ -28,6 +28,7 @@ add_action('plugins_loaded', function () {
     Models\Taxonomies\EventYear::init();
     // Field Groups
     Models\FieldGroups\Speakers::init();
+    Models\FieldGroups\Page::init();
     // Blocks
     Models\Blocks\Hero::init();
     Models\Blocks\Accordion::init();
@@ -44,9 +45,5 @@ add_action('plugins_loaded', function () {
     Controllers\Blocks\Hero::init();
     Controllers\Blocks\Accordion::init();
 
-
-    add_action( 'wp_loaded', function(){
-        flush_rewrite_rules();
-    });
 });
 

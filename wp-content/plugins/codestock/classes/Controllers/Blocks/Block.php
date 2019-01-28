@@ -13,7 +13,7 @@ class Block
     {
         $slug = $context['register']['slug'];
         $view_path = "views/blocks/{$slug}/{$slug}.twig";
-        $filepath_theme = get_template_directory() . $view_path;
+        $filepath_theme = trailingslashit(get_template_directory()) . $view_path;
         $filepath_plugin = PATH . $view_path;
 
         $filepath = file_exists($filepath_theme) ? $filepath_theme : $filepath_plugin;

@@ -40,12 +40,12 @@ p {
 
 a {
   font-weight: 600;
-  color: $brand__blue;
+  color: $brand__purple--light;
   text-decoration: underline;
 
   &:focus,
   &:hover {
-    color: $brand__blue;
+    color: $brand__orange;
 
     &:after {
       color: inherit;

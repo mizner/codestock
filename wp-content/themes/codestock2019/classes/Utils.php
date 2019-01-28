@@ -17,7 +17,7 @@ class Utils
         return get_post_type_archive_link($post_type);
     }
 
-    public static function inline_svg($filename)
+    public static function svg_inline($filename)
     {
         $filepath = PATH . 'dist/svgs/' . $filename . '.svg';
 
@@ -29,7 +29,8 @@ class Utils
 
         include $filepath;
 
-        return ob_get_clean();
+        $html = ob_get_clean();
+        return $html;
     }
 
     public static function image($args)

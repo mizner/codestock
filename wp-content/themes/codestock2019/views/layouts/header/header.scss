@@ -1,14 +1,46 @@
 .header {
   $base: &;
 
-  background-color: $brand__gray--dark;
+  background-color: $brand__purple--light;
   padding-top: 15px;
   padding-bottom: 15px;
 
+  .container {
+    @include for-tablet-landscape-up {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+
   #{$base}__logo {
-    max-width: 200px;
-    @include for-phone-only {
-      margin: auto;
+    display: flex;
+    max-width: 300px;
+
+    a {
+      display: block;
+      width: 100%;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+
+      path {
+        fill: white;
+      }
     }
   }
 }
+
+body.header_transparent{
+  .header {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
+  }
+}
+
