@@ -9,8 +9,8 @@ class Blocks
     const WHITELIST = [
         'acf/accordion',
         'acf/hero',
-        // 'core/paragraph',
-        // 'core/image',
+        'core/paragraph',
+        'core/image',
         // 'core/heading',
         // 'core/gallery',
         // 'core/list',

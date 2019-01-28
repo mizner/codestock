@@ -1,11 +1,16 @@
-{#{{ dump(queried_object) }}#}
-{% set base = 'singlesPage' %}
+{#{{ dump() }}#}
+{% set base = 'SinglesPage' %}
 <section class="{{ base }}">
     <div class="container">
+        <header>
+            <a href="">
+                <span>Back</span>
+            </a>
+        </header>
         <article>
-            <h1>{{ queried_object.post_title }}</h1>
-            {{ queried_object.post_content }}
-            {{ function('the_content') }}
+            <img alt="{{ image.alt }}" src="{{ image.url }}">
+            <h1>{{ post.post_title }}</h1>
+            <div class="{{ base }}__content">{{ the_content() }}</div>
         </article>
     </div>
 </section>

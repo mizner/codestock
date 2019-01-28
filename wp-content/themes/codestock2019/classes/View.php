@@ -20,6 +20,17 @@ class View
         add_action('theme_view_footer', [$class, 'footer']);
     }
 
+    private function getArchiveType()
+    {
+        if (is_post_type_archive() || is_home()) {
+            $type = 'post_type';
+        } else {
+            $type = 'taxonomy';
+        }
+
+        return $type;
+    }
+
     private function getType()
     {
         // Archive, Single, Search, 404
@@ -84,8 +95,18 @@ class View
         $context = [
             'filter' => $this->path->dir,
             'file' => $this->path->file,
-            'queried_object' => $this->queriedObject,
+            'queried' => $this->queriedObject,
+            // 'context' => Timber::get_context(), // Avoiding, given too much information
         ];
+
+        if ('singles' === $this->type) {
+            // $context['post'] = Timber::get_post();
+            $context['post'] = Timber::get_post();
+        }
+
+        if ('archives' === $this->type) {
+            $context['posts'] = Timber::get_posts();
+        }
 
         return $context;
     }
@@ -112,13 +133,30 @@ class View
 
         $data = apply_filters($this->path->dir, $this->context);
 
-        printf("<!-- start: {$this->path->dir} -->");
-        if (class_exists(Timber::class)) {
-            // var_dump($data);
-            do_action('theme_before_render', $data);
-            Timber::render($this->path->file, $data);
-            do_action('theme_after_render', $data);
+        if (!have_posts()) {
+            Timber::render('views/archives/none.twig', $data);
         }
+
+        printf("<!-- start: {$this->path->dir} -->");
+
+
+        do_action('theme_before_render', $data);
+        switch ($this->type):
+            case 'singles':
+                while (have_posts()) :
+                    the_post(); // Set up post data
+                    Timber::render($this->path->file, $data);
+                endwhile;
+                break;
+            case 'archives':
+                Timber::render($this->path->file, $data);
+                break;
+            default:
+                break;
+        endswitch;
+
+        do_action('theme_after_render', $data);
+
         printf("<!-- end: {$this->path->dir} -->");
     }
 
@@ -129,14 +167,5 @@ class View
         do_action('theme_after_footer');
     }
 
-    private function getArchiveType()
-    {
-        if (is_post_type_archive() || is_home()) {
-            $type = 'post_type';
-        } else {
-            $type = 'taxonomy';
-        }
 
-        return $type;
-    }
 }

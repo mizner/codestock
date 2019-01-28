@@ -39,6 +39,14 @@ class TimberFunctions
                 'name' => 'critical',
                 'action' => [CriticalAssets::class, 'render'],
             ],
+            [
+                'name' => 'title',
+                'action' => 'the_title',
+            ],
+            [
+                'name' => 'the_content',
+                'action' => 'the_content',
+            ],
         ];
 
         foreach ($actions as $action) {
