@@ -1,7 +1,8 @@
 <?php
 
-namespace Pyxl\Theme;
+namespace CodeStock\Theme;
 
+use CodeStock\Theme\Utils as Util;
 use Timber;
 
 class TimberFunctions
@@ -16,35 +17,39 @@ class TimberFunctions
     {
         $actions = [
             [
-                'name' => 'svg',
-                'action' => [SVG::class, 'render'],
+                'name'   => 'archive_link',
+                'action' => [Util::class, 'archive_link'],
             ],
             [
-                'name' => 'image',
-                'action' => [Utils::class, 'image'],
+                'name'   => 'svg_inline',
+                'action' => [Util::class, 'svg_inline'],
             ],
             [
-                'name' => 'site',
+                'name'   => 'image',
+                'action' => [Util::class, 'image'],
+            ],
+            [
+                'name'   => 'site',
                 'action' => 'get_bloginfo',
             ],
             [
-                'name' => 'search_form',
+                'name'   => 'search_form',
                 'action' => 'get_search_form',
             ],
             [
-                'name' => 'log',
-                'action' => [Utils::class, 'log'],
+                'name'   => 'log',
+                'action' => [Util::class, 'log'],
             ],
             [
-                'name' => 'critical',
+                'name'   => 'critical',
                 'action' => [CriticalAssets::class, 'render'],
             ],
             [
-                'name' => 'title',
+                'name'   => 'title',
                 'action' => 'the_title',
             ],
             [
-                'name' => 'the_content',
+                'name'   => 'the_content',
                 'action' => 'the_content',
             ],
         ];

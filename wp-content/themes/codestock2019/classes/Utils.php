@@ -1,19 +1,43 @@
 <?php
 
-namespace Pyxl\Theme;
+namespace CodeStock\Theme;
 
-use const Pyxl\Theme\PATH;
-use const Pyxl\Theme\URI;
+use const CodeStock\Theme\PATH;
+use const CodeStock\Theme\URI;
 
 class Utils
 {
 
+    public static function archive_link($post_type = false)
+    {
+        if (!$post_type) {
+            $post_type = get_post_type();
+        }
+
+        return get_post_type_archive_link($post_type);
+    }
+
+    public static function inline_svg($filename)
+    {
+        $filepath = PATH . 'dist/svgs/' . $filename . '.svg';
+
+        if (!file_exists($filepath)) {
+            return;
+        }
+
+        ob_start();
+
+        include $filepath;
+
+        return ob_get_clean();
+    }
+
     public static function image($args)
     {
-        $filename = $args['file'];
-        $alt = $args['alt'];
+        $filename          = $args['file'];
+        $alt               = $args['alt'];
         $relative_filepath = "dist/images/{$filename}";
-        $url = file_exists(PATH . $relative_filepath) ? URI . $relative_filepath : false;
+        $url               = file_exists(PATH . $relative_filepath) ? URI . $relative_filepath : false;
         return "<img src='{$url}' alt='{$alt}'>";
     }
 
@@ -59,7 +83,8 @@ class Utils
             if (is_array($arg) || is_object($arg)) {
                 error_log(print_r($arg, true));
 
-            } else {
+            }
+            else {
                 error_log($arg);
             }
             error_log("--------------------------------------------------------------------------------------------------");
@@ -88,7 +113,7 @@ class Utils
         $qualifiedFile = null;
 
         $themePath = PATH;
-        $themeUri = URI;
+        $themeUri  = URI;
 
         // If dev file exists e.g( app.js ) override $qualifiedFile.
         if (file_exists($themePath . $path)) {
@@ -96,7 +121,7 @@ class Utils
         }
 
         // Create a string to match a possible production file e.g.( app.min.js ) which is likely uglified/minified.
-        $extensionPos = strrpos($path, '.');
+        $extensionPos   = strrpos($path, '.');
         $fileProduction = substr($path, 0, $extensionPos) . '.min' . substr($path, $extensionPos);
 
         // Test for production file e.g.( app.min.js) override $qualifiedFile.
