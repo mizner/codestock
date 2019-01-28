@@ -1,0 +1,54 @@
+.countdown {
+
+  &__item {
+    flex: 1 auto;
+    position: relative;
+    display: inline-block;
+    flex-wrap: wrap;
+    font-size: 3em;
+    width: 3em;
+    height: 3em;
+    @include for-tablet-landscape-up {
+      font-size: 4em;
+    }
+
+    &:after {
+      content: "";
+      background-image: url('../svgs/hexagon.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 99;
+      transform-origin: center center;
+      transform: rotate(90deg);
+    }
+  }
+
+  &__value {
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__type {
+    font-size: .2em;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: .5em;
+    right: .25em;
+    letter-spacing: .5em;
+    font-weight: bold;
+    transform-origin: center center;
+    transform: rotate(-30deg);
+  }
+}
+

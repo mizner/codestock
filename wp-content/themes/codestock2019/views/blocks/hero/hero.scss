@@ -20,6 +20,8 @@
   }
 
   &__title {
+    margin-top: .5em;
+    margin-bottom: 0;
     @include for-tablet-landscape-up {
       font-size: 3em;
     }
@@ -64,5 +66,18 @@
         font-size: 20vw;
       }
     }
+  }
+}
+
+body.page-home {
+  .hero__content {
+    opacity: 0;
+    animation: reveal 1s 2s forwards;
+  }
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
   }
 }

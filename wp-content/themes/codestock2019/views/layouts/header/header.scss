@@ -10,12 +10,13 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      align-items: center;
     }
   }
 
   #{$base}__logo {
     display: flex;
-    max-width: 300px;
+    max-width: 400px;
 
     a {
       display: block;
@@ -33,8 +34,8 @@
   }
 }
 
-body.header_transparent{
-  .header {
+body.header_transparent .header {
+  @include for-tablet-landscape-up {
     background-color: transparent;
     position: absolute;
     top: 0;
@@ -44,3 +45,27 @@ body.header_transparent{
   }
 }
 
+body.page-home .header {
+ &__logo {
+   path {
+     fill: transparent;
+     stroke: white;
+     stroke-dasharray: 100;
+     animation: dash 2s 0s linear;
+     animation-fill-mode: forwards;
+   }
+ }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  75% {
+    stroke-dashoffset: 0;
+    fill: transparent;
+  }
+  100% {
+    fill: white;
+  }
+}
