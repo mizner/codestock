@@ -2,15 +2,15 @@
 
 namespace CodeStock\Core\Models\Taxonomies;
 
-use CodeStock\Core\Models\PostTypes\Sample as ContentType;
+use CodeStock\Core\Models\PostTypes\Speakers as ContentType;
 
-class SampleCategory
+class EventYear
 {
-    const SLUG = 'sample_cat';
+    const SLUG = 'event_year';
 
-    const SINGULAR = 'Categories';
+    const SINGULAR = 'Event Year';
 
-    const PLURAL = 'Category';
+    const PLURAL = 'Event Years';
 
     const POST_TYPES = [ContentType::SLUG];
 
@@ -56,7 +56,7 @@ class SampleCategory
 
         register_taxonomy(
             self::SLUG,
-            [self::POST_TYPES],
+            self::POST_TYPES,
             $args
         );
     }
