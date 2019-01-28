@@ -45,7 +45,8 @@
     "deliciousbrains-plugin/wp-migrate-db-pro": "*",
     "deliciousbrains-plugin/wp-migrate-db-pro-media-files": "*",
     "pyxl/acf-pro": "5.8.0-beta3",
-    "wpackagist-plugin/timber-library": "^1.7"
+    "wpackagist-plugin/timber-library": "1.8.4",
+    "wpackagist-plugin/wordpress-seo": "^9.5"
   },
   "scripts": {
     "post-install-cmd": [
