@@ -10,6 +10,16 @@ class Setup
         add_action('init', [$class, 'general']);
         add_action('init', [$class, 'registerMenus']);
         add_action('init', [$class, 'registerSidebars']);
+        add_filter('body_class', [$class, 'body_class']);
+    }
+
+    public function body_class($classes)
+    {
+        global $post;
+        if (isset($post)) {
+            $classes[] = $post->post_type . '-' . $post->post_name;
+        }
+        return $classes;
     }
 
     /**
@@ -17,7 +27,6 @@ class Setup
      */
     public function general()
     {
-
         add_theme_support('align-wide');
 
         add_theme_support('title-tag');
@@ -47,7 +56,7 @@ class Setup
             'menu_primary' => __('Primary Menu', 'pyxl-theme'),
             // 'menu_secondary' => __('Secondary Menu', 'pyxl-theme'),
             // 'menu_footer'    => __('Footer Menu', 'pyxl-theme'),
-            'menu_social' => __('Social Menu', 'pyxl-theme'),
+            'menu_social'  => __('Social Menu', 'pyxl-theme'),
         ]);
     }
 
@@ -57,13 +66,13 @@ class Setup
     public function registerSidebars()
     {
         register_sidebar([
-            'name' => esc_html__('Sidebar', 'pyxl-theme'),
-            'id' => 'sidebar',
-            'description' => esc_html__('Add widgets here.', 'pyxl-theme'),
+            'name'          => esc_html__('Sidebar', 'pyxl-theme'),
+            'id'            => 'sidebar',
+            'description'   => esc_html__('Add widgets here.', 'pyxl-theme'),
             'before_widget' => '<section id="%1$s" class="widget %2$s">',
-            'after_widget' => '</section>',
-            'before_title' => '<h2 class="widget-title">',
-            'after_title' => '</h2>',
+            'after_widget'  => '</section>',
+            'before_title'  => '<h2 class="widget-title">',
+            'after_title'   => '</h2>',
         ]);
     }
 }
