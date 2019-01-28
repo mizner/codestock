@@ -13,7 +13,7 @@ class Blocks
         'core/image',
         // 'core/heading',
         // 'core/gallery',
-        // 'core/list',
+        'core/list',
         // 'core/quote',
         // 'core/shortcode',
         // 'core/archives',
