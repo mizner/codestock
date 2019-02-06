@@ -62,9 +62,9 @@ class Blocks
         // 'core/file',
         // 'core/freeform',
         // 'core/html',
-        // 'core/media-text',
+        'core/media-text',
         // 'core/latest-comments',
-        // 'core/latest-posts',
+        'core/latest-posts',
         // 'core/missing',
         // 'core/more',
         // 'core/nextpage',
@@ -84,29 +84,20 @@ class Blocks
     public static function init()
     {
         $class = new self;
-        add_action('enqueue_block_editor_assets', [$class, 'register'], 99);
+        add_filter('allowed_block_types', [$class, 'allowed_blocks'], 10, 2);
     }
 
-    public function register()
+    public function allowed_blocks($allowed_blocks, $post)
     {
-        $current_screen = get_current_screen();
-        if ('post' !== $current_screen->base) {
-            return;
-        }
-        wp_enqueue_script(
-            'manageBlocks',
-            URI . 'dist/scripts/manageBlocks.js',
-            ['wp-blocks', 'wp-dom'],
-            time(),
-            true
-        );
-        wp_localize_script(
-            'manageBlocks',
-            'manageBlocks',
-            [
-                'whitelist' => self::WHITELIST,
-            ]
-        );
+
+        $allowed_blocks = self::WHITELIST;
+
+        // if ($post->post_type === 'page') {
+        //     $allowed_blocks[] = 'core/shortcode';
+        // }
+
+        return $allowed_blocks;
+
     }
 }
 
