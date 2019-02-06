@@ -16,6 +16,10 @@ const webpackConfig = {
       },
     ],
   },
+  externals: {
+    jquery: 'jQuery',
+    wp: 'wp'
+  },
   output: {
     filename: `[name].js`,
   },

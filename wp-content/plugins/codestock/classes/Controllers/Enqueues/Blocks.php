@@ -7,20 +7,21 @@ use const CodeStock\Core\URI;
 class Blocks
 {
     const WHITELIST = [
+        'custom/section',
         'acf/accordion',
         'acf/hero',
         'core/paragraph',
         'core/image',
-        // 'core/heading',
-        // 'core/gallery',
+        'core/heading',
+        'core/gallery',
         'core/list',
-        // 'core/quote',
+        'core/quote',
         // 'core/shortcode',
         // 'core/archives',
         // 'core/audio',
-        // 'core/button',
+        'core/button',
         // 'core/categories',
-        // 'core/code',
+        'core/code',
         'core/columns',
         'core/column',
         // 'core/cover',
@@ -60,12 +61,12 @@ class Blocks
         // 'core-embed/videopress',
         // 'core-embed/wordpress-tv',
         // 'core/file',
-        // 'core/freeform',
+        'core/freeform',
         // 'core/html',
         'core/media-text',
         // 'core/latest-comments',
         'core/latest-posts',
-        // 'core/missing',
+        'core/missing',
         // 'core/more',
         // 'core/nextpage',
         // 'core/preformatted',
@@ -84,7 +85,9 @@ class Blocks
     public static function init()
     {
         $class = new self;
+        add_action('enqueue_block_editor_assets', [$class, 'register'], 99);
         add_filter('allowed_block_types', [$class, 'allowed_blocks'], 10, 2);
+
     }
 
     public function allowed_blocks($allowed_blocks, $post)
@@ -99,76 +102,26 @@ class Blocks
         return $allowed_blocks;
 
     }
+
+    public function register()
+    {
+        $current_screen = get_current_screen();
+        if ('post' !== $current_screen->base) {
+            return;
+        }
+        wp_enqueue_script(
+            'manageBlocks',
+            URI . 'dist/scripts/manageBlocks.js',
+            ['wp-blocks', 'wp-dom'],
+            time(),
+            true
+        );
+        wp_localize_script(
+            'manageBlocks',
+            'manageBlocks',
+            [
+
+            ]
+        );
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

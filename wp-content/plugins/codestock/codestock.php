@@ -44,6 +44,5 @@ add_action('plugins_loaded', function () {
     // Blocks
     Controllers\Blocks\Hero::init();
     Controllers\Blocks\Accordion::init();
-
 });
 

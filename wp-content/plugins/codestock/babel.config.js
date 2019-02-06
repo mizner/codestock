@@ -5,5 +5,9 @@ module.exports = {
       '@babel/env',
       {}
     ]
-  ]
+  ],
+  plugins: [
+    '@wordpress/babel-plugin-import-jsx-pragma',
+    '@babel/transform-react-jsx',
+  ],
 };
