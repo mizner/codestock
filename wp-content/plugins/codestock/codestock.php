@@ -22,6 +22,8 @@ add_action('plugins_loaded', function () {
     /**
      * Models
      */
+    // Options Page
+    Models\OptionsPages\GlobalOptions::init();
     // Post Types
     Models\PostTypes\Speakers::init();
     // Taxonomies
@@ -29,6 +31,7 @@ add_action('plugins_loaded', function () {
     // Field Groups
     Models\FieldGroups\Speakers::init();
     Models\FieldGroups\Page::init();
+    Models\FieldGroups\GlobalOptions::init();
     // Blocks
     Models\Blocks\Hero::init();
     Models\Blocks\Accordion::init();
