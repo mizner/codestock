@@ -10,42 +10,61 @@ class Hero extends Block
     public static function init()
     {
         $args = [
-            'slug' => 'hero',
-            'name' => __('Hero', 'codestock'),
+            'slug'     => 'hero',
+            'name'     => __('Hero', 'codestock'),
             // 'icon' => 'dashicons-welcome-view-site',
             'keywords' => ['hero', 'slider'],
-            'fields' => [
+            'fields'   => [
                 [
-                    'slug' => 'title',
+                    'slug'  => 'title',
                     'label' => 'Title',
-                    'type' => 'text',
+                    'type'  => 'text',
                 ],
                 [
-                    'slug' => 'description',
-                    'label' => 'Description',
-                    'type' => 'wysiwyg',
+                    'slug'          => 'description',
+                    'label'         => 'Description',
+                    'type'          => 'wysiwyg',
                     'default_value' => '',
-                    'tabs' => 'all',
-                    'toolbar' => 'full',
-                    'media_upload' => 1,
-                    'delay' => 0,
+                    'tabs'          => 'all',
+                    'toolbar'       => 'full',
+                    'media_upload'  => 1,
+                    'delay'         => 0,
                 ],
                 [
-                    'slug' => 'image',
-                    'label' => 'Image',
-                    'type' => 'image',
+                    'label'         => 'Show Countdown',
+                    'slug'          => 'show_countdown',
+                    'type'          => 'button_group',
+                    'layout'        => 'horizontal',
+                    'return_format' => 'value',
+                    'choices'       => [
+                        'yes' => 'Yes',
+                        'no'  => 'No',
+                    ],
+                    'default_value' => [
+                        'no',
+                    ],
+                ],
+                [
+                    'label'        => 'Countdown',
+                    'slug'         => 'countdown',
+                    'type'         => 'date_time_picker',
+                ],
+                [
+                    'slug'         => 'image',
+                    'label'        => 'Image',
+                    'type'         => 'image',
                     'preview_size' => 'medium',
-                    'library' => 'all',
+                    'library'      => 'all',
                 ],
                 [
-                    'slug' => 'link',
+                    'slug'  => 'link',
                     'label' => 'Link',
-                    'type' => 'link',
+                    'type'  => 'link',
                 ],
                 [
-                    'slug' => 'link_secondary',
+                    'slug'  => 'link_secondary',
                     'label' => 'Link (secondary)',
-                    'type' => 'link',
+                    'type'  => 'link',
                 ],
             ],
         ];
