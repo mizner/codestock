@@ -42,6 +42,11 @@ class Hero extends Block
                     'label' => 'Link',
                     'type' => 'link',
                 ],
+                [
+                    'slug' => 'link_secondary',
+                    'label' => 'Link (secondary)',
+                    'type' => 'link',
+                ],
             ],
         ];
 

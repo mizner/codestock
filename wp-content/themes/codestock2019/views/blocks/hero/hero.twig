@@ -18,6 +18,11 @@
                         <span>{{ acf.link.title }}</span>
                     </a>
                 {% endif %}
+                {% if acf.link_secondary %}
+                    <a href="{{ acf.link_secondary.url }}" class="{{ base }}__button button" target="{{ acf.link_secondary.target }}">
+                        <span>{{ acf.link_secondary.title }}</span>
+                    </a>
+                {% endif %}
             </article>
         </div>
     </div>

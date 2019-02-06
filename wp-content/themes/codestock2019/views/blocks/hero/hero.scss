@@ -12,6 +12,10 @@
   .container {
   }
 
+  .hero__title {
+
+  }
+
 
 
   &__content {
@@ -28,7 +32,10 @@
     margin-top: .25em;
     margin-bottom: .25em;
     @include for-tablet-landscape-up {
-      font-size: 3em;
+      border-top: .1em solid white;
+      padding-top: 1em;
+      font-family: 'BakerHalfBareBold', monospace;
+      font-size: 2em;
     }
   }
 
