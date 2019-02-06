@@ -7,7 +7,8 @@ use const CodeStock\Core\URI;
 class Blocks
 {
     const WHITELIST = [
-        'custom/section',
+        // 'custom/section',
+        'mkl/section-block',
         'acf/accordion',
         'acf/hero',
         'core/paragraph',

@@ -32,6 +32,18 @@
     {
       "type": "composer",
       "url": "https://composer.pyxl.com"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "thinkpyxl/gutenberg-section-block",
+        "version": "1.0",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/thinkpyxl/gutenberg-section-block/archive/master.zip"
+        }
+      }
     }
   ],
   "config": {
@@ -44,6 +56,7 @@
     "php": "^7.0",
     "deliciousbrains-plugin/wp-migrate-db-pro": "*",
     "deliciousbrains-plugin/wp-migrate-db-pro-media-files": "*",
+    "thinkpyxl/gutenberg-section-block": "*",
     "pyxl/acf-pro": "5.8.0-beta3",
     "wpackagist-plugin/timber-library": "1.8.4",
     "wpackagist-plugin/wordpress-seo": "^9.5"
