@@ -40,11 +40,12 @@
   }
 
   a {
-    @include font-accent;
+    //@include font-accent;
     text-transform: uppercase;
     text-decoration: none;
     color: $brand__orange;
     font-size: 1.5em;
+    letter-spacing: 0.2em;
     @include for-tablet-landscape-up {
       font-size: 1em;
     }

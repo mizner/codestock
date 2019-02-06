@@ -7,7 +7,7 @@ import webpackStream from 'webpack-stream';
 import { webpackConfig } from '../webpack.config';
 import { paths } from '../utils/paths';
 
-export function scripts (cb) {
+function scripts (cb) {
   return pump(
     [
       src(`${paths.src.scripts}/*.js`),
@@ -19,3 +19,5 @@ export function scripts (cb) {
     cb
   );
 }
+
+export { scripts };
