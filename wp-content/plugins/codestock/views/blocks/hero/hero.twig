@@ -8,9 +8,14 @@
         <h1>{{ acf.title }}</h1>
         <div class="{{ base }}__content">
             {{ acf.description }}
-            {% if acf.link %}
-                <a href="{{ acf.link.url }}" class="button" target="{{ acf.link.target }}">
-                    <span>{{ acf.link.title }}</span>
+            {% if acf.link_primary %}
+                <a href="{{ acf.link_primary.url }}" class="button" target="{{ acf.link_primary.target }}">
+                    <span>{{ acf.link_primary.title }}</span>
+                </a>
+            {% endif %}
+            {% if acf.link_secondary %}
+                <a href="{{ acf.link_secondary.url }}" class="button" target="{{ acf.link_secondary.target }}">
+                    <span>{{ acf.link_secondary.title }}</span>
                 </a>
             {% endif %}
         </div>

@@ -57,8 +57,8 @@ class Hero extends Block
                     'library'      => 'all',
                 ],
                 [
-                    'slug'  => 'link',
-                    'label' => 'Link',
+                    'slug'  => 'link_primary',
+                    'label' => 'Link (primary)',
                     'type'  => 'link',
                 ],
                 [
