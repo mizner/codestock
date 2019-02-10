@@ -25,11 +25,11 @@ add_action('plugins_loaded', function () {
     // Options Page
     Models\OptionsPages\GlobalOptions::init();
     // Post Types
-    Models\PostTypes\Speakers::init();
+    // Models\PostTypes\Speakers::init();
     // Taxonomies
     Models\Taxonomies\EventYear::init();
     // Field Groups
-    Models\FieldGroups\Speakers::init();
+    // Models\FieldGroups\Speakers::init();
     Models\FieldGroups\Page::init();
     Models\FieldGroups\GlobalOptions::init();
     // Blocks
