@@ -1,25 +1,32 @@
 {#{{ dump() }}#}
-{% if is_preview %}
-    <h1>Hero</h1>
-{% endif %}
 {% set base = 'hero' %}
+{% if is_preview %}
+    <style>
+        .{{ base }}.wp-block {
+            margin-left: 1em;
+            margin-right: 1em;
+        }
+    </style>
+{% endif %}
 <section class="{{ base }} wp-block" data-align="{{ block.align }}">
     <div class="{{ base }}__year"></div>
     <div class="{{ base }}__image" style="background-image: url('{{ acf.image.url }}')"></div>
     <div class="{{ base }}__overlay"></div>
     <div class="container">
         <div class="{{ base }}__content">
-            <div id="countdown" class="countdown"></div>
+            {% if 'yes' == acf.show_countdown %}
+            <div id="countdown" class="countdown" data-countdown="{{ acf.countdown }}"></div>
+            {% endif %}
             <article class="{{ base }}__text">
                 <h3 class="{{ base }}__title">{{ acf.title }}</h3>
                 {{ acf.description }}
-                {% if acf.link %}
-                    <a href="{{ acf.link.url }}" class="{{ base }}__button button" target="{{ acf.link.target }}">
-                        <span>{{ acf.link.title }}</span>
+                {% if acf.link_primary.url %}
+                    <a href="{{ acf.link_primary.url }}" class="button" target="{{ acf.link_primary.target }}">
+                        <span>{{ acf.link_primary.title }}</span>
                     </a>
                 {% endif %}
-                {% if acf.link_secondary %}
-                    <a href="{{ acf.link_secondary.url }}" class="{{ base }}__button button" target="{{ acf.link_secondary.target }}">
+                {% if acf.link_secondary.url %}
+                    <a href="{{ acf.link_secondary.url }}" class="button" target="{{ acf.link_secondary.target }}">
                         <span>{{ acf.link_secondary.title }}</span>
                     </a>
                 {% endif %}

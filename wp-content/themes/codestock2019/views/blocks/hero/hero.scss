@@ -12,12 +12,6 @@
   .container {
   }
 
-  .hero__title {
-
-  }
-
-
-
   &__content {
     position: relative;
     z-index: 15;
@@ -34,7 +28,6 @@
     @include for-tablet-landscape-up {
       border-top: .1em solid white;
       padding-top: 1em;
-      font-family: 'BakerHalfBareBold', monospace;
       font-size: 2em;
     }
   }
