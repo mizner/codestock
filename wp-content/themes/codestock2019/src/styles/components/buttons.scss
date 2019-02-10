@@ -1,3 +1,5 @@
+input[type="submit"],
+.wp-block-button__link,
 .button {
   @include button-primary;
 }
