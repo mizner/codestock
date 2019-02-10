@@ -11,6 +11,7 @@ class GlobalOptions
         $class = new self;
         add_action('acf/init', [$class, 'social']);
         add_action('acf/init', [$class, 'footer']);
+        add_action('acf/init', [$class, 'integrations']);
     }
 
     public function social()
@@ -114,6 +115,37 @@ class GlobalOptions
         acf_add_local_field_group([
             'key'             => "{$prefix}_footer",
             'title'           => 'Footer',
+            'fields'          => $fields,
+            'location'        => $location,
+            'label_placement' => 'left',
+        ]);
+    }
+
+    public function integrations()
+    {
+        $prefix = OptionPage::SLUG;
+
+        $location = [
+            [
+                [
+                    'param'    => 'options_page',
+                    'operator' => '==',
+                    'value'    => OptionPage::SLUG,
+                ],
+            ],
+        ];
+
+        $fields = [
+            [
+                'label' => 'Google Maps API Key',
+                'key'   => "{$prefix}_gmaps_api_key",
+                'name'  => 'gmaps_api_key',
+                'type'  => 'text',
+            ],
+        ];
+        acf_add_local_field_group([
+            'key'             => "{$prefix}_integrations",
+            'title'           => 'Integrations',
             'fields'          => $fields,
             'location'        => $location,
             'label_placement' => 'left',
