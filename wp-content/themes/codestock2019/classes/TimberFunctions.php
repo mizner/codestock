@@ -25,6 +25,10 @@ class TimberFunctions
                 'action' => [Util::class, 'svg_inline'],
             ],
             [
+                'name'   => 'menu',
+                'action' => [Util::class, 'menu'],
+            ],
+            [
                 'name'   => 'image',
                 'action' => [Util::class, 'image'],
             ],
