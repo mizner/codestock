@@ -43,5 +43,6 @@ wp-content/themes/*
 # Exceptions (generally, our custom work)
 !wp-content/mu-plugins/mu-custom-loader.php
 !wp-content/mu-plugins/mu-custom
+!wp-content/plugins/sessionize
 !wp-content/plugins/codestock
 !wp-content/themes/codestock2019
