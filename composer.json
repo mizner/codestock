@@ -36,12 +36,12 @@
     {
       "type": "package",
       "package": {
-        "name": "thinkpyxl/gutenberg-section-block",
+        "name": "marcusig/gutenberg-section-block",
         "version": "1.0",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
-          "url": "https://github.com/thinkpyxl/gutenberg-section-block/archive/master.zip"
+          "url": "https://github.com/marcusig/gutenberg-section-block/archive/master.zip"
         }
       }
     }
@@ -56,19 +56,34 @@
     "php": "^7.0",
     "deliciousbrains-plugin/wp-migrate-db-pro": "*",
     "deliciousbrains-plugin/wp-migrate-db-pro-media-files": "*",
-    "thinkpyxl/gutenberg-section-block": "*",
     "pyxl/acf-pro": "5.8.0-beta3",
+    "marcusig/gutenberg-section-block": "*",
+    "wpackagist-plugin/imsanity": "^2.4",
+    "wpackagist-plugin/regenerate-thumbnails": "^3.1",
     "wpackagist-plugin/timber-library": "1.8.4",
     "wpackagist-plugin/wordpress-seo": "^9.5"
   },
   "scripts": {
     "post-install-cmd": [
-      "@installWordPress"
     ],
-    "post-update-cmd": [
+    "post-update-cmd": [],
+    "setup": [
+      "composer install",
+      "@installWordPress",
+      "npm install --prefix wp-content/themes/codestock2019",
+      "@build"
     ],
-    "installWordPress": [
-      "wp core download --path=core --skip-content --force --version='5.0.3'"
-    ]
+    "start": [
+      "npm run --prefix wp-content/themes/codestock2019 start"
+    ],
+    "build": [
+      "npm run --prefix wp-content/themes/codestock2019 build"
+    ],
+    "prod": [
+      "composer install --no-dev --optimize-autoloader",
+      "npm install --prefix wp-content/themes/codestock2019",
+      "npm run --prefix wp-content/themes/codestock2019 prod"
+    ],
+    "installWordPress": "wp core download --path=core --skip-content --force"
   }
 }
