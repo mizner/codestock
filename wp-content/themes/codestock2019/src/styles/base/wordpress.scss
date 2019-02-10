@@ -137,3 +137,14 @@ a img.aligncenter {
   margin: auto;
   max-width: none;
 }
+
+.wp-block-columns {
+  .wp-block-column {
+    margin-top: 0;
+  }
+}
+
+.wp-block-button {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
