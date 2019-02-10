@@ -53,10 +53,10 @@ class Setup
     public function registerMenus()
     {
         register_nav_menus([
-            'menu_primary' => __('Primary Menu', 'pyxl-theme'),
-            // 'menu_secondary' => __('Secondary Menu', 'pyxl-theme'),
-            // 'menu_footer'    => __('Footer Menu', 'pyxl-theme'),
-            'menu_social'  => __('Social Menu', 'pyxl-theme'),
+            'menu_primary' => __('Primary Menu', 'codestock-theme'),
+            'menu_secondary' => __('Secondary Menu', 'codestock-theme'),
+            // 'menu_footer'    => __('Footer Menu', 'codestock-theme'),
+            'menu_social'  => __('Social Menu', 'codestock-theme'),
         ]);
     }
 
@@ -66,9 +66,9 @@ class Setup
     public function registerSidebars()
     {
         register_sidebar([
-            'name'          => esc_html__('Sidebar', 'pyxl-theme'),
+            'name'          => esc_html__('Sidebar', 'codestock-theme'),
             'id'            => 'sidebar',
-            'description'   => esc_html__('Add widgets here.', 'pyxl-theme'),
+            'description'   => esc_html__('Add widgets here.', 'codestock-theme'),
             'before_widget' => '<section id="%1$s" class="widget %2$s">',
             'after_widget'  => '</section>',
             'before_title'  => '<h2 class="widget-title">',
