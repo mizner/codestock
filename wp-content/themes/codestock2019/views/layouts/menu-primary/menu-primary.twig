@@ -1,0 +1,27 @@
+{#{{ dump() }}#}
+{% set base = 'menu-primary' %}
+<nav id="menuMain"
+     aria-expanded="false"
+     aria-hidden="true"
+     class="{{ base }}">
+    <button id="menuMainButton"
+            class="{{ base }}__button button"
+            data-target="#{{ base }}"
+            aria-controls="{{ base }}"
+            aria-expanded="false"
+            type="button"
+            data-toggle="collapse"
+            aria-label="Toggle navigation">
+        <span>toggle_menu</span>
+    </button>
+    {{ function('wp_nav_menu', {
+        'menu'            : 'menu_primary',
+        'theme_location'  : 'menu_primary',
+        'container'       : false,
+        'container_id'    : '',
+        'container_class' : '',
+        'menu_id'         : false,
+        'menu_class'      : "#{base}__list",
+        'depth'           : 2,
+    }) }}
+</nav>
