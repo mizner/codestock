@@ -12,6 +12,11 @@
       justify-content: space-between;
       align-items: center;
     }
+    > * {
+      @include for-tablet-landscape-up {
+        flex: 1 auto;
+      }
+    }
   }
 
   #{$base}__logo {
@@ -47,7 +52,7 @@ body.header_transparent .header {
   z-index: 99;
 }
 
-body.page-home .header {
+body.page-frontpage .header {
  &__logo {
    path {
      fill: transparent;

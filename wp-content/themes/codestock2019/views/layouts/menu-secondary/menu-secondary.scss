@@ -1,5 +1,11 @@
 .menu-secondary {
   $base: '.menu-secondary';
+  &__list {
+    @include for-tablet-landscape-up {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
   .menu-item {
     a {
       @include button-primary;

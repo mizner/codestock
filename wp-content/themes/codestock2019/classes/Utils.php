@@ -7,12 +7,6 @@ use const CodeStock\Theme\URI;
 
 class Utils
 {
-
-    public static function menu($args = false)
-    {
-        return wp_nav_menu($args);
-    }
-
     public static function archive_link($post_type = false)
     {
         if (!$post_type) {

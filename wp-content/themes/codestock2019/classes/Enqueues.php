@@ -7,7 +7,6 @@ class Enqueues
     public static function init()
     {
         $class = new self;
-        add_action('wp_enqueue_scripts', [$class, 'jquery_swap'], -1);
         add_action('wp_enqueue_scripts', [$class, 'register'], 25);
         add_action('wp_enqueue_scripts', [$class, 'head'], 50);
         add_action('get_footer', [$class, 'footer'], 50);
@@ -63,30 +62,5 @@ class Enqueues
         }
 
         return $html;
-    }
-
-    public function jquery_swap()
-    {
-        /*
-         * Swap for jQuery Google API
-         * We shouldn't bundle jQuery in WordPress for a lot of reasons,
-         * but we can at least swap it for a version that is probably cached
-         */
-        if (is_user_logged_in() && is_admin() || is_admin()) {
-            return;
-        }
-
-        // jQuery Core
-        wp_deregister_script('jquery-core');
-        $jQuery_core = '//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js#async';
-        wp_register_script('jquery-core', $jQuery_core, false, '1.12.4', true);
-
-        // jQuery Migrate
-        wp_deregister_script('jquery-migrate');
-        $jQuery_migrate = includes_url('/js/jquery/jquery-migrate.min.js#async');
-        wp_register_script('jquery-migrate', $jQuery_migrate, ['jquery-core'], '1.4.1', true);
-
-        wp_enqueue_script('jquery-core');
-        wp_enqueue_script('jquery-migrate');
     }
 }

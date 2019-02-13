@@ -37,7 +37,7 @@ class Removals
             'themes.php',                 // Appearance
             'plugins.php',                // Plugins
             // 'users.php',                  // Users
-            'tools.php',                  // Tools
+            // 'tools.php',                  // Tools
             // 'options-general.php',        // Settings
             // 'admin.php?page=mp_st',
             // 'admin.php?page=cp_main',

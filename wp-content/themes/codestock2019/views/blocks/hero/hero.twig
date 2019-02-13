@@ -5,17 +5,19 @@
         .{{ base }}.wp-block {
             margin-left: 1em;
             margin-right: 1em;
+            min-height: 200px;
         }
     </style>
 {% endif %}
-<section class="{{ base }} wp-block" data-align="{{ block.align }}">
+<section class="{{ base }} wp-block {{ block.className }}"
+         data-align="{{ block.align }}">
     <div class="{{ base }}__year"></div>
     <div class="{{ base }}__image" style="background-image: url('{{ acf.image.url }}')"></div>
     <div class="{{ base }}__overlay"></div>
     <div class="container">
         <div class="{{ base }}__content">
             {% if 'yes' == acf.show_countdown %}
-            <div id="countdown" class="countdown" data-countdown="{{ acf.countdown }}"></div>
+                <div id="countdown" class="countdown" data-countdown="{{ acf.countdown }}"></div>
             {% endif %}
             <article class="{{ base }}__text">
                 <h3 class="{{ base }}__title">{{ acf.title }}</h3>

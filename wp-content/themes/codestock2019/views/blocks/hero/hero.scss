@@ -9,6 +9,7 @@
     padding-top: 15rem;
     padding-bottom: 5rem;
   }
+
   .container {
   }
 
@@ -16,6 +17,7 @@
     position: relative;
     z-index: 15;
   }
+
   &__text {
     @include for-tablet-landscape-up {
       padding-left: 1em;
@@ -74,7 +76,7 @@
   }
 }
 
-body.page-home {
+.hero--special {
   .hero__content {
     opacity: 0;
     animation: reveal 1s 2s forwards;

@@ -31,9 +31,9 @@ add_action('plugins_loaded', function () {
     DashboardWidgets\Removals::init();
     DashboardWidgets\Additions::init();
 
-    AdminMenu\MenuPages\Removals::init();
-    AdminMenu\MenuPages\Additions::init();
-    AdminMenu\Redirects::init();
+    // AdminMenu\MenuPages\Removals::init();
+    // AdminMenu\MenuPages\Additions::init();
+    // AdminMenu\Redirects::init();
 
     AdminBar\Removals::init();
     AdminBar\Additions::init();

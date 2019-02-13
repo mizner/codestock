@@ -26,7 +26,7 @@ class TimberFunctions
             ],
             [
                 'name'   => 'menu',
-                'action' => [Util::class, 'menu'],
+                'action' => 'wp_nav_menu',
             ],
             [
                 'name'   => 'image',
