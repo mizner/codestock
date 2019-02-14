@@ -53,7 +53,6 @@ class Block
 
     private static function slug_handler($prefix, $fields)
     {
-        _log($fields);
         $acf_fields = [];
         foreach ($fields as $field) {
             $acf_fields[] = array_merge($field, [

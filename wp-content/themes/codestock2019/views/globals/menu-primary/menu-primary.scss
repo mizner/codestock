@@ -60,6 +60,12 @@
     padding-left: 0;
     text-align: center;
 
+
+    @include for-tablet-landscape-up {
+      display: flex;
+      justify-content: flex-end;
+    }
+
     li > ul:not([aria-expanded="true"]) {
       @include screen-reader-text;
     }

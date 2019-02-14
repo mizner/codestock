@@ -9,6 +9,7 @@
   .menu-item {
     a {
       @include button-primary;
+      margin-left: .5em;
     }
   }
 }

@@ -2,11 +2,37 @@
 
 namespace CodeStock\Theme;
 
+use WP_REST_Request;
 use const CodeStock\Theme\PATH;
 use const CodeStock\Theme\URI;
 
 class Utils
 {
+    public static function get_posts($post_type = 'posts', $params = [])
+    {
+        $request = new WP_REST_Request('GET', "/wp/v2/{$post_type}");
+        empty($params) ?: $request->set_query_params($params);
+        $response = rest_do_request($request);
+        if ($response->is_error()) {
+            // Convert to a WP_Error object.
+            return $response->as_error();
+        }
+
+        return $response->get_data();
+    }
+
+    public static function get_post($post_type, $id)
+    {
+        $request = new WP_REST_Request('GET', "/wp/v2/{$post_type}/{$id}");
+        $response = rest_do_request($request);
+        if ($response->is_error()) {
+            // Convert to a WP_Error object.
+            return $response->as_error();
+        }
+
+        return $response->get_data();
+    }
+
     public static function archive_link($post_type = false)
     {
         if (!$post_type) {

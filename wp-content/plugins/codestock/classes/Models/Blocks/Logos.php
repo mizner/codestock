@@ -22,6 +22,7 @@ class Logos extends Block
                 [
                     'slug' => 'items',
                     'label' => 'Items',
+                    'instructions' => 'Images should be approximately 250(H) x 150(W) px and centered',
                     'type' => 'repeater',
                     'layout' => 'block',
                     'sub_fields' => [

@@ -1,16 +1,18 @@
 <?php
 
-namespace CodeStock\Theme;
+namespace Codestock\Theme;
 
-use Timber\Timber;
+use Timber;
+use CodeStock\Theme\Utils;
+use const CodeStock\Theme\PATH;
+use const CodeStock\Theme\URI;
 
 class View
 {
-    private $path;
-    private $type;
-    private $file;
-    private $context = [];
-    private $queriedObject;
+    const TWIG_ROOT = PATH . 'views/';
+
+    const CONDITIONS = [
+    ];
 
     public static function init()
     {
@@ -20,18 +22,41 @@ class View
         add_action('theme_view_footer', [$class, 'footer'], 25);
     }
 
-    private function getArchiveType()
+    public function main($queried_object)
     {
-        $type = 'taxonomy';
+        $info = $this->get_info($queried_object);
+        // var_dump($info);
+        $info = apply_filters($info->hook, $info);
 
-        if (is_post_type_archive() || is_home()) {
-            $type = 'post_type';
-        }
-
-        return $type;
+        do_action('theme_before_main', $info);
+        $this->render($info->file, $info);
+        do_action('theme_after_main', $info);
     }
 
-    private function getType()
+    public function header()
+    {
+        do_action('theme_before_head');
+        $this->render('globals/head', []);
+        do_action('theme_after_head');
+
+        do_action('theme_before_header');
+        $this->render('globals/header/header', []);
+        do_action('theme_after_header');
+    }
+
+    public function footer()
+    {
+        do_action('theme_before_footer');
+        $this->render('globals/footer/footer', []);
+        do_action('theme_after_footer');
+    }
+
+    public function render($path, $data = [])
+    {
+        Timber\Timber::render(self::TWIG_ROOT . "{$path}.twig", (array)$data);
+    }
+
+    public function get_type()
     {
         $type = '404'; // Default
 
@@ -50,124 +75,83 @@ class View
         return $type;
     }
 
-    private function getPath($type)
+    public function get_framework($info)
     {
-        $path = (object)[
-            'dir'      => 'views/',
+        $framework = 'twig';
+        foreach (self::CONDITIONS as $key => $value) {
+            if ($key !== $info->path) {
+                continue;
+            }
+
+            $framework = $value['framework'];
+        }
+        return $framework;
+    }
+
+    public function get_info($queried_object)
+    {
+        $queried_object = $queried_object ?: get_queried_object();
+
+        $info = (object)[
+            'hook'     => '',
+            'type'     => $this->get_type(),
+            'sub_type' => '',
+            'path'     => '',
             'basename' => '',
             'file'     => '',
+            'data'     => [],
+            'queried'  => $queried_object,
         ];
 
-        switch ($type) {
+        switch ($info->type) {
             case 'archives':
                 if (is_home()) {
-                    $path->basename = 'post';
-                    $path->dir      .= "{$type}/post_type/{$path->basename}";
+                    $post_type      = get_post_type_object('post');
+                    $info->basename = $post_type->rest_base;
+                    $info->sub_type = 'post_types';
+                    $info->data     = [
+                        'posts' => Utils::get_posts(),
+                    ];
                 }
                 elseif (is_post_type_archive()) {
-                    $path->basename = $this->queriedObject->name;
-                    $path->dir      .= "{$type}/post_type/{$path->basename}";
+                    $post_type      = get_post_type_object($info->queried->name);
+                    $info->basename = $post_type->rest_base;
+                    $info->sub_type = 'post_types';
+                    $info->data     = [
+                        'posts' => Utils::get_posts($post_type->rest_base),
+                    ];
                 }
                 else {
-                    $path->basename = $this->queriedObject->taxonomy;
-                    $path->dir      .= "{$type}/taxonomy/{$path->basename}";
-
+                    $info->basename = $info->queried->taxonomy;
+                    $info->sub_type = 'taxonomies';
                 }
+                $info->path = "{$info->type}/{$info->sub_type}/{$info->basename}";
                 break;
             case 'singles':
-                $path->basename = $this->queriedObject->post_type;
-                $path->dir      .= "{$type}/{$path->basename}";
+                $post_type      = get_post_type_object($info->queried->post_type);
+                $info->basename = $post_type->rest_base;
+                $info->sub_type = $post_type->rest_base;
+                $info->path     = "{$info->type}/{$info->sub_type}";
+                $info->data     = [
+                    'post' => Utils::get_post($post_type->rest_base, $queried_object->ID),
+                ];
                 break;
             case 'search':
-                $path->basename = 'search';
-                $path->dir      .= "{$path->basename}";
+                $info->basename = 'search';
+                $info->path     = "{$info->basename}";
+                $info->data     = [
+                    'search_term' => get_search_query(),
+                ];
                 break;
             default:
-                $path->basename = '404';
-                $path->dir      .= "{$path->basename}";
+                $info->basename = '404';
+                $info->path     .= "{$info->basename}";
                 break;
         }
+        $info->hook      = "{$info->path}";
+        $info->file      = "{$info->path}/{$info->basename}";
+        $info->framework = $this->get_framework($info);
 
-        if (class_exists(Timber::class)) {
-            $path->file = PATH . "{$path->dir}/{$path->basename}.twig";
-        }
-
-        return $path;
-    }
-
-    private function setContext()
-    {
-        $context = [
-            'filter'  => $this->path->dir,
-            'file'    => $this->path->file,
-            'queried' => $this->queriedObject,
-            // 'context' => Timber::get_context(), // Avoiding, given too much information
-        ];
-
-        if ('singles' === $this->type) {
-            $context['post'] = Timber::get_post();
-        }
-
-        if ('archives' === $this->type) {
-            $context['posts'] = Timber::get_posts();
-        }
-
-        return $context;
-    }
-
-    public function header()
-    {
-        if (class_exists(Timber::class)) {
-            do_action('theme_before_head');
-            Timber::render(PATH . 'views/head.twig');
-            do_action('theme_after_head');
-
-            do_action('theme_before_header');
-            Timber::render(PATH . 'views/layouts/header/header.twig');
-            do_action('theme_after_header');
-        }
-    }
-
-    public function main($queriedObject)
-    {
-        $this->queriedObject = $queriedObject;
-        $this->type          = $this->getType();
-        $this->path          = $this->getPath($this->type);
-        $this->context       = $this->setContext();
-
-        if (DEBUG) {
-            var_dump("Filter: {$this->path->dir}");
-        }
-        $data = apply_filters($this->path->dir, $this->context);
-
-        if (!have_posts()) {
-            Timber::render('views/archives/none.twig', $data);
-        }
-
-        printf("<!-- start: {$this->path->dir} -->");
-        do_action('theme_before_render', $data);
-        switch ($this->type):
-            case 'singles':
-                while (have_posts()) :
-                    the_post(); // Set up post data
-                    Timber::render($this->path->file, $data);
-                endwhile;
-                break;
-            case 'archives':
-                Timber::render($this->path->file, $data);
-                break;
-            default:
-                break;
-        endswitch;
-        do_action('theme_after_render', $data);
-        printf("<!-- end: {$this->path->dir} -->");
-
-    }
-
-    public function footer()
-    {
-        do_action('theme_before_footer');
-        Timber::render(PATH . 'views/layouts/footer/footer.twig');
-        do_action('theme_after_footer');
+        return $info;
     }
 }

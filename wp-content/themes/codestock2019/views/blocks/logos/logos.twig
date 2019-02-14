@@ -1,0 +1,20 @@
+{#{{ dump() }}#}
+{% if is_preview %}
+    <h1>Logo Preview</h1>
+{% endif %}
+{% set base = 'logos' %}
+<section class="{{ base }} wp-block {{ block.className }}" data-align="{{ block.align }}">
+    <div class="container">
+        <header class="{{ base }}__header">
+            <h3 class="{{ base }}__title">{{ acf.title }}</h3>
+        </header>
+        <ul class="{{ base }}__items">
+            {% for item in acf.items %}
+                <li class="{{ base }}__item">
+                    {#{{ dump(item) }}#}
+                    <img src="{{ item.image.url }}" alt="{{ item.image.alt }}">
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
