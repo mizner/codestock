@@ -42,7 +42,8 @@ add_action('plugins_loaded', function () {
      */
 
     // Post Types
-    Controllers\PostTypes\Speakers::init();
+    // Controllers\PostTypes\Speakers::init();
+    Controllers\PostTypes\Post::init();
     // Enqueues
     Controllers\Enqueues\Blocks::init();
     // Blocks

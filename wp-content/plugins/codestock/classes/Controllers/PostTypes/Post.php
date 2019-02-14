@@ -2,31 +2,20 @@
 
 namespace CodeStock\Core\Controllers\PostTypes;
 
+use CodeStock\Core\Utils\General as Utils;
+
 class Post
 {
     public static function init()
     {
         $class = new self;
-        add_filter('views/singles/post', [$class, 'single']);
+        add_filter('rest_prepare_post', [$class, 'single'], 10, 3);
     }
 
-    public function single($context)
+    public function single($data, $post, $context)
     {
-        $post_id           = get_the_ID();
-        $featured_image_id = get_post_thumbnail_id($post_id);
+        $data->data['image'] = Utils::get_image_data($data->data['featured_media']);
 
-        $context['title']   = get_the_title($post_id);
-        $context['content'] = get_the_content($post_id);
-        // TODO, write helper function to loop through image sizes for full url's
-        // $context['image'] = wp_get_attachment_metadata($featured_image_id);
-
-        $context['image']     = [
-            'alt' => get_post_meta($featured_image_id, '_wp_attachment_image_alt', true),
-            'url' => get_the_post_thumbnail_url($post_id, 'large'),
-        ];
-        $context['srcset']    = wp_get_attachment_image_srcset($featured_image_id);
-        $context['htmlImage'] = get_the_post_thumbnail($post_id);
-
-        return $context;
+        return $data;
     }
 }

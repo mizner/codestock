@@ -3,9 +3,11 @@
 <section class="{{ base }}">
     <div class="container">
         {% for post in data.posts %}
+            {#{{ dump(post) }}#}
             <article>
                 <figure>
-                    <img src="{{ post.image.src }}" alt="{{ post.image.alt }}">
+                    {#{{ dump(post.image.sizes.thumbnail.url) }}#}
+                    <img src="{{ post.image.sizes.medium.url }}" alt="{{ post.image.alt }}">
                 </figure>
                 <a href="{{ post.link }}">
                     <h3>{{ post.title.rendered }}</h3>
