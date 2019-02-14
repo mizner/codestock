@@ -1,0 +1,15 @@
+.archivesPosts {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  .container {
+    @include for-tablet-landscape-up {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    > * {
+      @include for-tablet-landscape-up {
+        max-width: 32%;
+      }
+    }
+  }
+}
