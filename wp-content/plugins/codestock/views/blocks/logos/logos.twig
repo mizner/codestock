@@ -1,0 +1,18 @@
+{#{{ dump() }}#}
+{% if is_preview %}
+    <h1>Logos</h1>
+{% endif %}
+{% set base = 'logos' %}
+<section class="{{ base }}">
+    <div class="container">
+        <header>
+            <h3>{{ acf.title }}</h3>
+        </header>
+        <article class="{{ base }}__content">
+            {% for item in acf.items %}
+                {#{{ dump(item) }}#}
+                <img src="{{ item.image.url }}" alt="{{ item.image.alt }}">
+            {% endfor %}
+        </article>
+    </div>
+</section>

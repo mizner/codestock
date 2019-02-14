@@ -36,7 +36,7 @@ class Block
         $args = [
             'key'      => "block/{$args['slug']}",
             'title'    => __($args['name'], 'codestock'),
-            'fields'   => self::slug_handler($args['fields']),
+            'fields'   => self::slug_handler($args['slug'], $args['fields']),
             'location' => [
                 [
                     [
@@ -46,18 +46,22 @@ class Block
                     ],
                 ],
             ],
+            3,
         ];
         acf_add_local_field_group($args);
     }
 
-    private static function slug_handler($fields)
+    private static function slug_handler($prefix, $fields)
     {
+        _log($fields);
         $acf_fields = [];
         foreach ($fields as $field) {
             $acf_fields[] = array_merge($field, [
-                'key'        => "block/{$field['slug']}",
+                'key'        => "{$prefix}/{$field['slug']}",
                 'name'       => $field['slug'],
-                'sub_fields' => Util::has_key('sub_fields', $field) ? self::slug_handler($field['sub_fields']) : false,
+                'sub_fields' => Util::has_key('sub_fields', $field)
+                    ? self::slug_handler($prefix, $field['sub_fields'])
+                    : false,
             ]);
         }
         return $acf_fields;
@@ -70,7 +74,7 @@ class Block
             'title'           => __($args['name'], 'codestock'),
             'description'     => "The {$args['name']} block",
             'render_callback' => function ($block, $content = '', $is_preview = false) use ($args) {
-                $hook = "block/{$args['slug']}";
+                $hook = "blocks/{$args['slug']}";
                 // var_dump($hook);
                 do_action($hook, [
                     'block'      => $block,

@@ -35,6 +35,7 @@ add_action('plugins_loaded', function () {
     // Blocks
     Models\Blocks\Hero::init();
     Models\Blocks\Accordion::init();
+    Models\Blocks\Logos::init();
 
     /**
      * Controllers
@@ -47,5 +48,6 @@ add_action('plugins_loaded', function () {
     // Blocks
     Controllers\Blocks\Hero::init();
     Controllers\Blocks\Accordion::init();
+    Controllers\Blocks\Logos::init();
 });
 

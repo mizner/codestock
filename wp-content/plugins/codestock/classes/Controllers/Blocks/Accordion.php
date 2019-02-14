@@ -9,7 +9,7 @@ class Accordion extends Block
     public static function init()
     {
         $class = new self;
-        add_action('block/accordion', [$class, 'filter']);
+        add_action('blocks/accordion', [$class, 'filter']);
     }
 
     public function filter($context)
